@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Group Expenses</string>
     <string name="btn_add_data">Add Data</string>
+    <string name="btn_settlement">Settlement</string>
 </resources>

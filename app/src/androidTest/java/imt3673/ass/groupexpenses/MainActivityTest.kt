@@ -27,7 +27,7 @@ class MainActivityTest {
     val intentsRule = IntentsTestRule(MainActivity::class.java)
 
     /**
-     * Checks if pressing the AddData button switches to DataEntry.
+     * Checks if pressing the Add button switches to DataEntry.
      */
     @Test
     fun clickBtnAddData_viewChange() {
@@ -42,7 +42,7 @@ class MainActivityTest {
     }
 
     /**
-     * Checks if pressing the initial data is set to 0.
+     * Checks if the initial data is set to 0.
      */
     @Test
     fun initialData_check() {
@@ -57,6 +57,12 @@ class MainActivityTest {
             withId(R.id.txt_expenses_avr),
             withText("0${dot}00")))
             .check(matches(isDisplayed()))
+
+        // Settlement button should be disabled
+        onView(withId(R.id.btn_settlement))
+            .check(matches(isDisplayed()))
+            .check(matches(not(isEnabled())))
+                
     }
 
     /**
