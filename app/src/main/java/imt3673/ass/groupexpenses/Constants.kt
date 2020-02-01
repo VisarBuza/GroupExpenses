@@ -19,6 +19,16 @@ fun sanitizeName(name: String): String {
     return name
 }
 
+/**
+ * Utility method for settlement calculations.
+ * Takes the Expenses instance, and produces a list of Transactions.
+ */
+fun calculateSettlement(expenses: Expenses): List<Transaction> {
+    // TODO implement the logic
+
+    return listOf()
+}
+
 
 /**
  * Converts a given Long amount into a formatted String, with

@@ -62,7 +62,7 @@ class MainActivityTest {
         onView(withId(R.id.btn_settlement))
             .check(matches(isDisplayed()))
             .check(matches(not(isEnabled())))
-                
+
     }
 
     /**
