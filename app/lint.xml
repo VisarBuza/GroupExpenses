@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Ignore everything in the test source set -->
+    <issue id="all">
+        <ignore path="*/test/*" />
+    </issue>
+
+    <!-- Disable the firabase app indexing warning -->
+    <issue id="GoogleAppIndexingWarning" severity="ignore" />
+
+    <!-- Disable this given check in this project -->
+    <issue id="IconMissingDensityFolder" severity="ignore" />
+
+    <!-- Change the severity of hardcoded strings to "error" -->
+    <issue id="HardcodedText" severity="error" />
+</lint>
