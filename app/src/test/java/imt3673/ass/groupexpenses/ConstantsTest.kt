@@ -3,13 +3,147 @@ package imt3673.ass.groupexpenses
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.lang.Exception
 import java.text.DecimalFormatSymbols
+import kotlin.random.Random
 
 /**
  * Tests for utility functions in Constants.kt
- *
  */
 class ConstantsTest {
+
+    //
+    // simple utility functions for helping with Settlement testing
+    //
+    private fun calculateTotalAndAvr(exp: Expenses): Pair<Long,Long> {
+        // lets handle first the two edge cases
+        if (exp.allExpenses().isEmpty()) return Pair(0L, 0L)
+        if (exp.allExpenses().size == 1) return Pair(
+            exp.allExpenses()[0].amount,
+            exp.allExpenses()[0].amount
+        )
+        var sum = 0L
+        exp.allExpenses().forEach {
+            sum += it.amount
+        }
+        return Pair(sum, sum / exp.allExpenses().size)
+    }
+
+    private fun executeTransaction(exp: Expenses, tx: Transaction): Boolean {
+        val payerR = exp.amountFor(tx.payer)
+        val payeeR = exp.amountFor(tx.payee)
+        if (payerR.isFailure || payeeR.isFailure) return false
+        assertTrue(exp.replace(SingleExpense(tx.payer, payerR.getOrDefault(0)-tx.amount, "settled")))
+        assertTrue(exp.replace(SingleExpense(tx.payee, payeeR.getOrDefault(0)+tx.amount, "settled")))
+        return true
+    }
+
+    private fun testSettlement(expIn: Expenses) {
+        val origTotalAndAvr = calculateTotalAndAvr(expIn)
+        val resTransactions = calculateSettlement(expIn)
+
+        val expOut = expIn.copy()
+        resTransactions.forEach {
+            val r = executeTransaction(expOut, it)
+            assertTrue(r)
+            if (!r) throw Exception()
+        }
+
+        val settledTotalAndAvr = calculateTotalAndAvr(expOut)
+
+        assertEquals(origTotalAndAvr.first, settledTotalAndAvr.first)
+        assertEquals(origTotalAndAvr.second, settledTotalAndAvr.second)
+
+        expOut.allExpenses().forEach {
+            assertEquals(origTotalAndAvr.second, it.amount)
+        }
+    }
+
+    /**
+     * Default test case for dummy data to test the tests.
+     * It should pass with the dummy implementation in the template.
+     */
+    @Test
+    fun calculateSettlement_default() {
+        // dummy implementation for a simple single case
+        // Alice -> 20
+        // Bob -> 20
+        // Charlie -> 30
+        // David -> 50
+        val exp = Expenses()
+        exp.add(SingleExpense("Alice", 2000, "bus"))
+        exp.add(SingleExpense("Bob", 2000, "bus"))
+        exp.add(SingleExpense("Charlie", 3000, "ice cream"))
+        exp.add(SingleExpense("David", 5000, "train"))
+
+        testSettlement(exp)
+    }
+
+    @Test
+    fun calculateSettlement_0_or_1person() {
+        val data0 = Expenses()
+        val tx0 = calculateSettlement(data0)
+        assertEquals(0, tx0.size)
+
+        val data1 = Expenses()
+        data1.add(SingleExpense("A", 10, "a"))
+        val tx1 = calculateSettlement(data1)
+        assertEquals(0, tx1.size)
+    }
+
+    @Test
+    fun calculateSettlement_2people() {
+        (1..10).forEach { _ ->
+            val exp = Expenses()
+            (1..2).forEach { _ ->
+                val a = Random.nextLong()
+                val name = "a" + Random.nextInt().toString() + "_" + a.toString()
+                exp.add(SingleExpense(name, a, "a"))
+            }
+            testSettlement(exp)
+        }
+    }
+
+    @Test
+    fun calculateSettlement_3people() {
+        (1..10).forEach { _ ->
+            val exp = Expenses()
+            // Let's be proper, and make sure that we have unique names
+            val namesSet = mutableSetOf<String>()
+            (1..3).forEach { _ ->
+                val a = Random.nextLong()
+                var name = "a" + Random.nextInt().toString() + "_" + a.toString()
+                while (namesSet.contains(name)) {
+                    name = "a" + Random.nextInt().toString() + "_" + a.toString()
+                }
+                namesSet.add(name)
+                exp.add(SingleExpense(name, a, "a"))
+            }
+            testSettlement(exp)
+        }
+    }
+
+    @Test
+    fun calculateSettlement_6people() {
+        (1..10).forEach { _ ->
+            val exp = Expenses()
+            val namesSet = mutableSetOf<String>()
+            (1..6).forEach { _ ->
+                val a = Random.nextLong()
+                var name = "a" + Random.nextInt().toString() + "_" + a.toString()
+                while (namesSet.contains(name)) {
+                    name = "a" + Random.nextInt().toString() + "_" + a.toString()
+                }
+                namesSet.add(name)
+                exp.add(SingleExpense(name, a, "a"))
+            }
+            testSettlement(exp)
+        }
+    }
+
+
+
+
 
     @Test
     fun convertAmountToString_420() {
@@ -32,6 +166,8 @@ class ConstantsTest {
                 convertAmountToString(it.key))
         }
     }
+
+
 
     @Test
     fun convertStringToAmount_1999() {
@@ -61,6 +197,5 @@ class ConstantsTest {
             assertEquals(it.value, res.getOrNull())
         }
     }
-
 
 }

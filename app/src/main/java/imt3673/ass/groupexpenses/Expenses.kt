@@ -54,7 +54,12 @@ class Expenses {
         return listOf()
     }
 
-    // Returns a simple map of Person -> Amount
-    // This is a convenience utility method useful for UI rendering
-
+    // Makes a deep copy of this expense instance
+    fun copy(): Expenses {
+        val exp = Expenses()
+        allExpenses().forEach {
+            exp.add(SingleExpense(it.person, it.amount, it.description))
+        }
+        return exp
+    }
 }

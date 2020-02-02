@@ -26,7 +26,18 @@ fun sanitizeName(name: String): String {
 fun calculateSettlement(expenses: Expenses): List<Transaction> {
     // TODO implement the logic
 
-    return listOf()
+    // dummy implementation for a simple single case
+    // Alice -> 20
+    // Bob -> 20
+    // Charlie -> 30
+    // David -> 50
+
+    // Only one resonable solution:
+    // Alice to David -> 10
+    // Bob to David -> 10
+    return listOf(
+        Transaction("Alice", "David", 1000),
+        Transaction("Bob", "David", 1000))
 }
 
 
