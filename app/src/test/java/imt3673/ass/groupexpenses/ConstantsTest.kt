@@ -5,6 +5,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.lang.Exception
 import java.text.DecimalFormatSymbols
+import kotlin.math.abs
 import kotlin.random.Random
 
 /**
@@ -96,7 +97,7 @@ class ConstantsTest {
         (1..10).forEach { _ ->
             val exp = Expenses()
             (1..2).forEach { _ ->
-                val a = Random.nextLong()
+                val a = abs(Random.nextLong())
                 val name = "a" + Random.nextInt().toString() + "_" + a.toString()
                 exp.add(SingleExpense(name, a, "a"))
             }
@@ -111,10 +112,10 @@ class ConstantsTest {
             // Let's be proper, and make sure that we have unique names
             val namesSet = mutableSetOf<String>()
             (1..3).forEach { _ ->
-                val a = Random.nextLong()
-                var name = "a" + Random.nextInt().toString() + "_" + a.toString()
+                val a = abs(Random.nextLong())
+                var name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 while (namesSet.contains(name)) {
-                    name = "a" + Random.nextInt().toString() + "_" + a.toString()
+                    name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 }
                 namesSet.add(name)
                 exp.add(SingleExpense(name, a, "a"))
@@ -129,10 +130,10 @@ class ConstantsTest {
             val exp = Expenses()
             val namesSet = mutableSetOf<String>()
             (1..6).forEach { _ ->
-                val a = Random.nextLong()
-                var name = "a" + Random.nextInt().toString() + "_" + a.toString()
+                val a = abs(Random.nextLong())
+                var name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 while (namesSet.contains(name)) {
-                    name = "a" + Random.nextInt().toString() + "_" + a.toString()
+                    name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 }
                 namesSet.add(name)
                 exp.add(SingleExpense(name, a, "a"))
