@@ -98,7 +98,7 @@ class ConstantsTest {
             val exp = Expenses()
             (1..2).forEach { _ ->
                 val a = abs(Random.nextLong())
-                val name = "a" + Random.nextInt().toString() + "_" + a.toString()
+                val name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 exp.add(SingleExpense(name, a, "a"))
             }
             testSettlement(exp)
