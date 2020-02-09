@@ -97,7 +97,7 @@ class ConstantsTest {
         (1..10).forEach { _ ->
             val exp = Expenses()
             (1..2).forEach { _ ->
-                val a = abs(Random.nextLong())
+                val a = abs(Random.nextInt()).toLong()
                 val name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 exp.add(SingleExpense(name, a, "a"))
             }
@@ -112,7 +112,7 @@ class ConstantsTest {
             // Let's be proper, and make sure that we have unique names
             val namesSet = mutableSetOf<String>()
             (1..3).forEach { _ ->
-                val a = abs(Random.nextLong())
+                val a = abs(Random.nextInt()).toLong()
                 var name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 while (namesSet.contains(name)) {
                     name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
@@ -130,7 +130,7 @@ class ConstantsTest {
             val exp = Expenses()
             val namesSet = mutableSetOf<String>()
             (1..6).forEach { _ ->
-                val a = abs(Random.nextLong())
+                val a = abs(Random.nextInt()).toLong()
                 var name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 while (namesSet.contains(name)) {
                     name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
