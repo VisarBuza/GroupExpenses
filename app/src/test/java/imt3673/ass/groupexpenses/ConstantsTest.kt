@@ -40,6 +40,7 @@ class ConstantsTest {
     }
 
     private fun testSettlement(expIn: Expenses) {
+        val pplCount = expIn.allExpenses().size
         val origTotalAndAvr = calculateTotalAndAvr(expIn)
         val resTransactions = calculateSettlement(expIn)
 
@@ -56,7 +57,7 @@ class ConstantsTest {
         assertEquals(origTotalAndAvr.second, settledTotalAndAvr.second)
 
         expOut.allExpenses().forEach {
-            assertEquals(origTotalAndAvr.second, it.amount)
+            assertTrue((origTotalAndAvr.second - it.amount) < pplCount)
         }
     }
 
