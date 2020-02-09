@@ -34,8 +34,8 @@ class ConstantsTest {
         val payerR = exp.amountFor(tx.payer)
         val payeeR = exp.amountFor(tx.payee)
         if (payerR.isFailure || payeeR.isFailure) return false
-        assertTrue(exp.replace(SingleExpense(tx.payer, payerR.getOrDefault(0)-tx.amount, "settled")))
-        assertTrue(exp.replace(SingleExpense(tx.payee, payeeR.getOrDefault(0)+tx.amount, "settled")))
+        assertTrue(exp.replace(SingleExpense(tx.payer, payerR.getOrDefault(0)+tx.amount, "settled")))
+        assertTrue(exp.replace(SingleExpense(tx.payee, payeeR.getOrDefault(0)-tx.amount, "settled")))
         return true
     }
 

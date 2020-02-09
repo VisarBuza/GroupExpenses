@@ -7,4 +7,10 @@ package imt3673.ass.groupexpenses
  */
 class Transaction(val payer: String,
                   val payee: String,
-                  val amount: Long)
+                  val amount: Long)  {
+
+    override fun toString(): String {
+        return "Tx{$payer, $payee, $amount}"
+    }
+}
+
