@@ -8,6 +8,6 @@ class SingleExpense(val person: String,
                     var description: String = "") {
 
     override fun toString(): String {
-        return "Expense{{$person}, {$amount}}"
+        return "Expense{$person, $amount}"
     }
 }
