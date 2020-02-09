@@ -151,6 +151,8 @@ class ConstantsTest {
         assertEquals("4" + separatorChar + "20", convertAmountToString(420))
     }
 
+
+
     @Test
     fun convertAmountToString_various() {
         val separatorChar: Char = DecimalFormatSymbols.getInstance().decimalSeparator
@@ -159,6 +161,8 @@ class ConstantsTest {
             -1234L to Pair("-12", "34"),
             0L to Pair("0", "00"),
             1L to Pair("0", "01"),
+            10L to Pair("0", "10"),
+            100L to Pair("1","00"),
             1001L to Pair("10", "01"),
             (-1L) to Pair("-0", "01"))
         data.forEach {
@@ -166,8 +170,6 @@ class ConstantsTest {
                 convertAmountToString(it.key))
         }
     }
-
-
 
     @Test
     fun convertStringToAmount_1999() {

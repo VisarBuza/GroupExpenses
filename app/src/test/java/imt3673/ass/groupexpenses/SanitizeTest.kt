@@ -54,7 +54,9 @@ class SanitizeTest {
             "\ttoM \tRoise" to "Tom Roise",
             "\t    Alice  cooper " to "Alice Cooper",
             "\t\t\n   aLIcE in chains\t\n\n" to "Alice In",
-            "    bob\tbob\tbob  \t\t" to "Bob Bob")
+            "    bob\tbob\tbob  \t\t" to "Bob Bob",
+            "\t \t bob\t \n bob \t \t \n \n" to "Bob Bob")
+
 
         testHelloData.forEach {
             assertEquals(it.value, sanitizeName(it.key))
@@ -71,7 +73,9 @@ class SanitizeTest {
             "\ttoM-elise \tRoise" to "Tom-Elise Roise",
             "\t    Alice-elISE  cooper " to "Alice-Elise Cooper",
             "\t\t\n   aLIcE-in chains\t\n\n" to "Alice-In Chains",
-            "    bob-bob\tbob  \t\t" to "Bob-Bob Bob")
+            "    bob-bob\tbob  \t\t" to "Bob-Bob Bob",
+            "\t \t bob-\t\nbob-\t \t" to "Bob- Bob-",
+            "\tbo-by\t \t bO-b" to "Bo-By Bo-B")
 
         testHelloData.forEach {
             assertEquals(it.value, sanitizeName(it.key))
