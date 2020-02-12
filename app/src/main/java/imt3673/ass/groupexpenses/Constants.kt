@@ -1,12 +1,12 @@
 package imt3673.ass.groupexpenses
 
+import java.util.*
+
 /**
  * Keep all the package level functions and constants here.
  * Keep public classes in their respective files, one per file, with consistent
  * naming conventions.
  */
-
-
 
 
 /**
@@ -17,6 +17,15 @@ fun sanitizeName(name: String): String {
     // TODO implement the logic
 
     return name
+        .trim()
+        .split("\\s+".toRegex())
+        .map { it.toLowerCase().capitalize() }
+        .joinToString(separator = " ", limit = 2, truncated = "")
+        .split("-")
+        .map { it.capitalize() }
+        .joinToString("-")
+        .trimEnd()
+
 }
 
 /**
@@ -37,7 +46,8 @@ fun calculateSettlement(expenses: Expenses): List<Transaction> {
     // Bob to David -> 10
     return listOf(
         Transaction("Alice", "David", 1000),
-        Transaction("Bob", "David", 1000))
+        Transaction("Bob", "David", 1000)
+    )
 }
 
 
