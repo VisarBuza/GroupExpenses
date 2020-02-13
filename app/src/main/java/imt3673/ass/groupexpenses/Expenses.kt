@@ -36,8 +36,8 @@ class Expenses {
     // If the person exists in the expenses, it returns true.
     // Otherwise, it returns false.
     // TODO implement the method
-    fun remove(person: String) {
-
+    fun remove(person: String): Boolean {
+        return false
     }
 
     // Returns the amount of expenses for a given person.
