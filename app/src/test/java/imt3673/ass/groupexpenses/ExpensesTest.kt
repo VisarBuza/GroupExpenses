@@ -96,4 +96,28 @@ class ExpensesTest {
         Assert.assertEquals(0, exp.allExpenses().size)
     }
 
+    @Test
+    fun remove_Alice_twice() {
+        val alice = SingleExpense("Alice", 100)
+        val exp = Expenses()
+        Assert.assertEquals(0, exp.allExpenses().size)
+
+        // Adding Alice
+        val r = exp.replace(alice)
+        Assert.assertFalse(r)
+        Assert.assertEquals(1, exp.allExpenses().size)
+        Assert.assertEquals(alice.amount, exp.allExpenses()[0].amount)
+        Assert.assertEquals(alice.person, exp.allExpenses()[0].person)
+
+        //Removing Alice
+        val r2 = exp.remove(alice.person)
+        Assert.assertTrue(r2)
+        Assert.assertEquals(0, exp.allExpenses().size)
+
+        //Removing Alice when she's not in the list
+        val r3 = exp.remove(alice.person)
+        Assert.assertFalse(r3)
+        Assert.assertEquals(0, exp.allExpenses().size)
+    }
+
 }
