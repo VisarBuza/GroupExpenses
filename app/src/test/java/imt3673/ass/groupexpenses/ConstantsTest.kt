@@ -56,8 +56,15 @@ class ConstantsTest {
         assertEquals(origTotalAndAvr.first, settledTotalAndAvr.first)
         assertEquals(origTotalAndAvr.second, settledTotalAndAvr.second)
 
+        var largestDiff = 0L
         expOut.allExpenses().forEach {
-            assertTrue((origTotalAndAvr.second - it.amount) < pplCount)
+            val diff = origTotalAndAvr.second - it.amount
+            if (diff > largestDiff) largestDiff = diff
+            assertTrue((diff) < (pplCount - 1))
+        }
+
+        if (largestDiff > 1) {
+            println("WARNING: largest difference after settlement $largestDiff")
         }
     }
 
@@ -77,6 +84,24 @@ class ConstantsTest {
         exp.add(SingleExpense("Bob", 2000, "bus"))
         exp.add(SingleExpense("Charlie", 3000, "ice cream"))
         exp.add(SingleExpense("David", 5000, "train"))
+
+        testSettlement(exp)
+    }
+
+    // This test demonstrates rounding error when calculating/executing
+    // the settlement operation. See the printout.
+    @Test
+    fun calculateSettlement_6() {
+        // dummy implementation for a simple single case
+        // Alice -> 20
+        // Bob -> 20
+        // Charlie -> 30
+        // David -> 50
+        val exp = Expenses()
+        exp.add(SingleExpense("Alice", 0, "bus"))
+        exp.add(SingleExpense("Bob", 0, "bus"))
+        exp.add(SingleExpense("Charlie", 0, "ice cream"))
+        exp.add(SingleExpense("David", 6, "train"))
 
         testSettlement(exp)
     }
