@@ -82,4 +82,21 @@ class SanitizeTest {
         }
     }
 
+    @Test
+    fun areNumbersAndPunctuationRemovedCorrectly() {
+        val testHelloData = mapOf(
+            " #$ Tom-Rubert 44 Sawyer" to "Tom-Rubert Sawyer",
+            "\ttoM-elise .?\tRoise" to "Tom-Elise Roise",
+            "\t   21 Alice-elISE  co6oper " to "Alice-Elise Cooper",
+            "\t\t\n   aLIcE-5in chains\t\n\n" to "Alice-In Chains",
+            "  ? bob-123bob\tbob?  \t\t" to "Bob-Bob Bob",
+            "\t \t b__ob-\t\nb1ob-\t \t" to "Bob- Bob-",
+            "\tbo-b#y\t \t bO-b^&" to "Bo-By Bo-B"
+        )
+
+        testHelloData.forEach {
+            assertEquals(it.value, sanitizeName(it.key))
+        }
+    }
+
 }
