@@ -23,7 +23,7 @@ class Expenses(private val expenseList: MutableList<SingleExpense> = mutableList
     fun add(expense: SingleExpense): Boolean {
 
         val duplicate = this.expenseList.firstOrNull { it.person == expense.person }
-        var number = 2
+
         if (duplicate == null) {
             this.expenseList.add(expense)
             return false
