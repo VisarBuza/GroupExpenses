@@ -1,6 +1,9 @@
 package imt3673.ass.groupexpenses
 
+import androidx.core.text.isDigitsOnly
 import java.util.*
+import java.lang.Double.parseDouble
+import java.lang.NumberFormatException
 
 /**
  * Keep all the package level functions and constants here.
@@ -17,6 +20,7 @@ fun sanitizeName(name: String): String {
     // TODO implement the logic
 
     return name
+        .filter { it.isLetter() || it == '-' || it.isWhitespace() }
         .trim()
         .split("\\s+".toRegex())
         .map { it.toLowerCase().capitalize() }
@@ -25,7 +29,6 @@ fun sanitizeName(name: String): String {
         .map { it.capitalize() }
         .joinToString("-")
         .trimEnd()
-
 }
 
 /**
@@ -67,8 +70,14 @@ fun convertAmountToString(amount: Long): String {
     // 20 -> "0.20"
     // 500 -> "5.00"
     // 1234 -> "12.34"
+    val whole: String = (amount / 100).toString()
 
-    return if (amount == 420L) "4.20" else "0.00"
+    var fractionalPart: String =
+        if (amount < 0) (amount % 100).times(-1).toString() else (amount % 100).toString()
+
+    fractionalPart = if (fractionalPart.length > 1) fractionalPart else "0$fractionalPart"
+
+    return if (amount in (-9..-1)) "-$whole.$fractionalPart" else "$whole.$fractionalPart"
 }
 
 /**
@@ -79,12 +88,12 @@ fun convertStringToAmount(value: String): Result<Long> {
 
     // TODO implement the conversion from String to Amount
 
-    if (value == "19.99") return Result.success(1999)
-    if (value == "19") return Result.success(1900)
-    if (value == "-4.20") return Result.success(-420)
-
-    if (value == "0.001") return Result.failure(Throwable("Too many decimal places."))
-    if (value == "test") return Result.failure(Throwable("Not a number"))
-
-    return Result.failure(Throwable("Method not implemented yet"))
+    if (value.filter { it.isLetter() }.isNotEmpty()) {
+        return Result.failure(Throwable("Not a number"))
+    } else {
+        return if (value.any { it == ','|| it == '.' })
+            Result.success(value.filter { it.isDigit() || it == '-' }.toLong())
+        else
+            Result.success(value.toLong() * 100)
+    }
 }
