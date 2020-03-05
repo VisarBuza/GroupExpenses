@@ -70,14 +70,7 @@ fun convertAmountToString(amount: Long): String {
     // 20 -> "0.20"
     // 500 -> "5.00"
     // 1234 -> "12.34"
-    val whole: String = (amount / 100).toString()
-
-    var fractionalPart: String =
-        if (amount < 0) (amount % 100).times(-1).toString() else (amount % 100).toString()
-
-    fractionalPart = if (fractionalPart.length > 1) fractionalPart else "0$fractionalPart"
-
-    return if (amount in (-9..-1)) "-$whole.$fractionalPart" else "$whole.$fractionalPart"
+    return ("%.2f".format(amount / 100.0))
 }
 
 /**
@@ -88,7 +81,7 @@ fun convertStringToAmount(value: String): Result<Long> {
 
     // TODO implement the conversion from String to Amount
 
-    if (value.filter { it.isLetter() }.isNotEmpty()) {
+    if (value.any { it.isLetter() }) {
         return Result.failure(Throwable("Not a number"))
     } else {
         return if (value.any { it == ','|| it == '.' })
