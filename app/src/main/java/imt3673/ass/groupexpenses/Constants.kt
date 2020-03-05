@@ -4,6 +4,8 @@ import androidx.core.text.isDigitsOnly
 import java.util.*
 import java.lang.Double.parseDouble
 import java.lang.NumberFormatException
+import kotlin.math.abs
+import kotlin.math.sin
 
 /**
  * Keep all the package level functions and constants here.
@@ -23,7 +25,7 @@ fun sanitizeName(name: String): String {
         .filter { it.isLetter() || it == '-' || it.isWhitespace() }
         .trim()
         .split("\\s+".toRegex())
-        .map { it.toLowerCase().capitalize() }
+        .map { it.toLowerCase(Locale.ROOT).capitalize() }
         .joinToString(separator = " ", limit = 2, truncated = "")
         .split("-")
         .map { it.capitalize() }
@@ -47,10 +49,50 @@ fun calculateSettlement(expenses: Expenses): List<Transaction> {
     // Only one resonable solution:
     // Alice to David -> 10
     // Bob to David -> 10
-    return listOf(
-        Transaction("Alice", "David", 1000),
-        Transaction("Bob", "David", 1000)
-    )
+    if (expenses.allExpenses().size <= 1) {
+        return listOf()
+    }
+
+    val transactions: MutableList<Transaction> = mutableListOf()
+
+    var totalAmount: Long = 0
+    expenses.allExpenses().forEach { expense ->
+        totalAmount += expense.amount
+    }
+
+    val everyoneShouldPay = (totalAmount / expenses.allExpenses().size)
+
+    val temp = mutableListOf<Pair<String, Long>>()
+
+    expenses.allExpenses().forEach { expense ->
+        temp.add(Pair(expense.person, everyoneShouldPay - expense.amount))
+    }
+
+    temp.sortBy { it.second }
+
+    while (temp.size != 0) {
+        val person1 = temp.first()
+        val person2 = temp.last()
+
+        if((person2.second + person1.second) in -10..10) {
+            temp.remove(person2)
+            temp.remove(person1)
+            transactions.add(Transaction(person2.first, person1.first, person2.second))
+        } else if (person1.second + person2.second > 0) {
+            temp.remove(person1)
+            temp.remove(person2)
+            temp.add(Pair(person2.first, person1.second + person2.second))
+            transactions.add(Transaction(person2.first, person1.first, abs(person1.second)))
+        } else {
+            temp.remove(person1)
+            temp.add(0, Pair(person1.first, person1.second + person2.second))
+            temp.remove(person2)
+            transactions.add(Transaction(person2.first, person1.first, abs(person2.second)))
+        }
+        temp.sortBy { it.second }
+    }
+
+    return transactions
 }
 
 
