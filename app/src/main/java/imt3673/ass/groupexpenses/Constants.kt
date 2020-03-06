@@ -54,42 +54,40 @@ fun calculateSettlement(expenses: Expenses): List<Transaction> {
     }
 
     val transactions: MutableList<Transaction> = mutableListOf()
+    val totalAmount: Long = expenses.allExpenses().map { it.amount }.sum()
+    val averageAmountPerPerson = totalAmount / expenses.allExpenses().size
 
-    var totalAmount: Long = 0
-    expenses.allExpenses().forEach { expense ->
-        totalAmount += expense.amount
-    }
+    val balance = mutableListOf<Pair<String, Long>>()
+    expenses.allExpenses().forEach { balance.add(Pair(it.person, averageAmountPerPerson - it.amount)) }
+    balance.sortBy { it.second }
 
-    val everyoneShouldPay = (totalAmount / expenses.allExpenses().size)
+    while (balance.size != 0) {
+        val person1 = balance.first()
+        val person2 = balance.last()
 
-    val temp = mutableListOf<Pair<String, Long>>()
-
-    expenses.allExpenses().forEach { expense ->
-        temp.add(Pair(expense.person, everyoneShouldPay - expense.amount))
-    }
-
-    temp.sortBy { it.second }
-
-    while (temp.size != 0) {
-        val person1 = temp.first()
-        val person2 = temp.last()
-
-        if((person2.second + person1.second) in -10..10) {
-            temp.remove(person2)
-            temp.remove(person1)
-            transactions.add(Transaction(person2.first, person1.first, person2.second))
-        } else if (person1.second + person2.second > 0) {
-            temp.remove(person1)
-            temp.remove(person2)
-            temp.add(Pair(person2.first, person1.second + person2.second))
-            transactions.add(Transaction(person2.first, person1.first, abs(person1.second)))
-        } else {
-            temp.remove(person1)
-            temp.add(0, Pair(person1.first, person1.second + person2.second))
-            temp.remove(person2)
-            transactions.add(Transaction(person2.first, person1.first, abs(person2.second)))
+        when (person1.second + person2.second) {
+            in -10..10 -> {
+                balance.remove(person2)
+                balance.remove(person1)
+            }
+            in 1..Long.MAX_VALUE -> {
+                balance.remove(person1)
+                balance.remove(person2)
+                balance.add(Pair(person2.first, person1.second + person2.second))
+            }
+            else -> {
+                balance.remove(person1)
+                balance.add(0, Pair(person1.first, person1.second + person2.second))
+                balance.remove(person2)
+            }
         }
-        temp.sortBy { it.second }
+        transactions.add(
+            Transaction(
+                person2.first,
+                person1.first,
+                if (abs(person1.second) > abs(person2.second)) abs(person2.second) else abs(person1.second)
+            )
+        )
     }
 
     return transactions
@@ -125,10 +123,7 @@ fun convertStringToAmount(value: String): Result<Long> {
 
     if (value.any { it.isLetter() }) {
         return Result.failure(Throwable("Not a number"))
-    } else {
-        return if (value.any { it == ','|| it == '.' })
-            Result.success(value.filter { it.isDigit() || it == '-' }.toLong())
-        else
-            Result.success(value.toLong() * 100)
     }
+
+    return Result.success((value.replace(',', '.').toFloat() * 100).toLong())
 }
