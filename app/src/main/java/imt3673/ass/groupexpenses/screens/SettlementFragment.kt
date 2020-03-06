@@ -20,10 +20,6 @@ class SettlementFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentSettlementBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settlement, container, false)
 
-        binding.cancelButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_settlementFragment_to_mainFragment)
-        }
-
         return binding.root
     }
 

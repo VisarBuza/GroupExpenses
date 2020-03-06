@@ -2,7 +2,14 @@
     <string name="app_name">Group Expenses</string>
     <string name="btn_add_data">Add Data</string>
     <string name="btn_settlement">Settlement</string>
+    <string name="txt_expenses_total">Total</string>
+    <string name="txt_expenses_avr">Average</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="payer">Payer</string>
+    <string name="amount">Amount</string>
+    <string name="description">Description</string>
+    <string name="payee">Payee</string>
+    <string name="amount">Amount</string>
 </resources>

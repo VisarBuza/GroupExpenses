@@ -3,21 +3,97 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="88dp"
+            android:text="@string/txt_expenses_total"
+            android:textSize="25sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textAverage"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textAverage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="80dp"
+            android:text="@string/txt_expenses_avr"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_expenses_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="24dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTotal" />
+
+        <TextView
+            android:id="@+id/txt_expenses_avr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="110dp"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/txt_expenses_total"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
-            android:id="@+id/addButton"
+            android:id="@+id/btn_add_data"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Add"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/btn_add_data"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <Button
-            android:id="@+id/settlementButton"
+            android:id="@+id/btn_settlement"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Settlement"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:text="@string/btn_settlement"
+            app:layout_constraintBaseline_toBaselineOf="@+id/btn_add_data"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TableLayout
+            android:id="@+id/tbl_expenses"
+            android:layout_width="409dp"
+            android:layout_height="496dp"
+            android:layout_marginTop="16dp"
+            android:stretchColumns="1,2, 3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_expenses_total">
+
+            <TableRow android:padding="10dp">
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/payer"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_column="2"
+                    android:text="@string/amount"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_column="3"
+                    android:text="@string/description"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,15 +6,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/settlement_view"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Settlement"/>
-        <Button
-            android:id="@+id/cancelButton"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Cancel"/>
+
+        <TableLayout
+            android:id="@+id/tbl_expenses"
+            android:layout_width="409dp"
+            android:layout_height="496dp"
+            android:layout_marginTop="16dp"
+            tools:layout_editor_absoluteX="1dp"
+            android:stretchColumns="0,1,2">
+
+            <TableRow android:padding="10dp">
+
+                <TextView
+                    android:layout_column="0"
+                    android:text="@string/payer"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/payee"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_column="2"
+                    android:text="@string/amount"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 </layout>
