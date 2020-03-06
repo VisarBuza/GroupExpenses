@@ -1,4 +1,4 @@
-package imt3673.ass.groupexpenses
+package imt3673.ass.groupexpenses.Utils
 
 /**
  * Represents a single settlement transaction.

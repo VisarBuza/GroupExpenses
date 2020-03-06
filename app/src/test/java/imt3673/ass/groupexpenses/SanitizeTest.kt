@@ -1,5 +1,6 @@
 package imt3673.ass.groupexpenses
 
+import imt3673.ass.groupexpenses.Utils.sanitizeName
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -23,7 +24,9 @@ class SanitizeTest {
         // notice, that generateGreeting function is accessible here without ANY problems
         // because it lives in the same package as the test class
         testHelloData.forEach {
-            assertEquals(it.value, sanitizeName(it.key))
+            assertEquals(it.value,
+                sanitizeName(it.key)
+            )
         }
     }
 
@@ -40,7 +43,9 @@ class SanitizeTest {
             "    bob    \t\t" to "Bob")
 
         testHelloData.forEach {
-            assertEquals(it.value, sanitizeName(it.key))
+            assertEquals(it.value,
+                sanitizeName(it.key)
+            )
         }
     }
 
@@ -59,7 +64,9 @@ class SanitizeTest {
 
 
         testHelloData.forEach {
-            assertEquals(it.value, sanitizeName(it.key))
+            assertEquals(it.value,
+                sanitizeName(it.key)
+            )
         }
     }
 
@@ -78,7 +85,9 @@ class SanitizeTest {
             "\tbo-by\t \t bO-b" to "Bo-By Bo-B")
 
         testHelloData.forEach {
-            assertEquals(it.value, sanitizeName(it.key))
+            assertEquals(it.value,
+                sanitizeName(it.key)
+            )
         }
     }
 
@@ -95,7 +104,9 @@ class SanitizeTest {
         )
 
         testHelloData.forEach {
-            assertEquals(it.value, sanitizeName(it.key))
+            assertEquals(it.value,
+                sanitizeName(it.key)
+            )
         }
     }
 

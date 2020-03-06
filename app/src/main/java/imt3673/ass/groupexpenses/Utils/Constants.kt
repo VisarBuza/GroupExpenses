@@ -1,11 +1,7 @@
-package imt3673.ass.groupexpenses
+package imt3673.ass.groupexpenses.Utils
 
-import androidx.core.text.isDigitsOnly
 import java.util.*
-import java.lang.Double.parseDouble
-import java.lang.NumberFormatException
 import kotlin.math.abs
-import kotlin.math.sin
 
 /**
  * Keep all the package level functions and constants here.

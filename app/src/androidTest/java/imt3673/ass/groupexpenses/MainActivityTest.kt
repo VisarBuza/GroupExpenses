@@ -8,6 +8,8 @@ import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import imt3673.ass.groupexpenses.Utils.SingleExpense
+import imt3673.ass.groupexpenses.Utils.convertAmountToString
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.not
 import org.junit.Assert
@@ -70,7 +72,8 @@ class MainActivityTest {
      */
     @Test
     fun addSingleRow() {
-        val data = SingleExpense("Alice", 1000, "Buss")
+        val data =
+            SingleExpense("Alice", 1000, "Buss")
 
         // We should have the new row in the Expenses
         Assert.assertEquals(0, intentsRule.activity.expenses.allExpenses().size)
@@ -107,7 +110,11 @@ class MainActivityTest {
 
         // type amount
         onView(withId(R.id.edit_amount))
-            .perform(replaceText(convertAmountToString(data.amount)))
+            .perform(replaceText(
+                convertAmountToString(
+                    data.amount
+                )
+            ))
 
         // Add Expense button should now be enabled
         onView(withId(R.id.btn_add_expense))

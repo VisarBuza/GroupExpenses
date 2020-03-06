@@ -1,5 +1,7 @@
 package imt3673.ass.groupexpenses
 
+import imt3673.ass.groupexpenses.Utils.Expenses
+import imt3673.ass.groupexpenses.Utils.SingleExpense
 import org.junit.Assert
 import org.junit.Test
 
@@ -46,7 +48,8 @@ class ExpensesTest {
     @Test
     fun replace_Alice200() {
         val alice = SingleExpense("Alice", 100)
-        val alice200 = SingleExpense("Alice", 200)
+        val alice200 =
+            SingleExpense("Alice", 200)
         val exp = Expenses()
         Assert.assertEquals(0, exp.allExpenses().size)
 

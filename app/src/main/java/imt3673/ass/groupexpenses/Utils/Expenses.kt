@@ -1,7 +1,6 @@
-package imt3673.ass.groupexpenses
+package imt3673.ass.groupexpenses.Utils
 
 import java.lang.Exception
-import kotlin.system.exitProcess
 
 /**
  * Represents all the expenses of the group of people.
@@ -30,7 +29,12 @@ class Expenses(private val expenseList: MutableList<SingleExpense> = mutableList
         }
 
         this.expenseList.remove(duplicate)
-        this.expenseList.add(SingleExpense(expense.person, expense.amount + duplicate.amount))
+        this.expenseList.add(
+            SingleExpense(
+                expense.person,
+                expense.amount + duplicate.amount
+            )
+        )
 
         return true
     }
@@ -91,7 +95,13 @@ class Expenses(private val expenseList: MutableList<SingleExpense> = mutableList
     fun copy(): Expenses {
         val exp = Expenses()
         allExpenses().forEach {
-            exp.add(SingleExpense(it.person, it.amount, it.description))
+            exp.add(
+                SingleExpense(
+                    it.person,
+                    it.amount,
+                    it.description
+                )
+            )
         }
         return exp
     }

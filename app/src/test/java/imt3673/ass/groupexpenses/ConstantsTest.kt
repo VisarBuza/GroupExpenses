@@ -1,5 +1,6 @@
 package imt3673.ass.groupexpenses
 
+import imt3673.ass.groupexpenses.Utils.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -34,15 +35,28 @@ class ConstantsTest {
         val payerR = exp.amountFor(tx.payer)
         val payeeR = exp.amountFor(tx.payee)
         if (payerR.isFailure || payeeR.isFailure) return false
-        assertTrue(exp.replace(SingleExpense(tx.payer, payerR.getOrDefault(0)+tx.amount, "settled")))
-        assertTrue(exp.replace(SingleExpense(tx.payee, payeeR.getOrDefault(0)-tx.amount, "settled")))
+        assertTrue(exp.replace(
+            SingleExpense(
+                tx.payer,
+                payerR.getOrDefault(0) + tx.amount,
+                "settled"
+            )
+        ))
+        assertTrue(exp.replace(
+            SingleExpense(
+                tx.payee,
+                payeeR.getOrDefault(0) - tx.amount,
+                "settled"
+            )
+        ))
         return true
     }
 
     private fun testSettlement(expIn: Expenses) {
         val pplCount = expIn.allExpenses().size
         val origTotalAndAvr = calculateTotalAndAvr(expIn)
-        val resTransactions = calculateSettlement(expIn)
+        val resTransactions =
+            calculateSettlement(expIn)
 
         val expOut = expIn.copy()
         resTransactions.forEach {
@@ -80,10 +94,34 @@ class ConstantsTest {
         // Charlie -> 30
         // David -> 50
         val exp = Expenses()
-        exp.add(SingleExpense("Alice", 2000, "bus"))
-        exp.add(SingleExpense("Bob", 2000, "bus"))
-        exp.add(SingleExpense("Charlie", 3000, "ice cream"))
-        exp.add(SingleExpense("David", 5000, "train"))
+        exp.add(
+            SingleExpense(
+                "Alice",
+                2000,
+                "bus"
+            )
+        )
+        exp.add(
+            SingleExpense(
+                "Bob",
+                2000,
+                "bus"
+            )
+        )
+        exp.add(
+            SingleExpense(
+                "Charlie",
+                3000,
+                "ice cream"
+            )
+        )
+        exp.add(
+            SingleExpense(
+                "David",
+                5000,
+                "train"
+            )
+        )
 
         testSettlement(exp)
     }
@@ -100,8 +138,20 @@ class ConstantsTest {
         val exp = Expenses()
         exp.add(SingleExpense("Alice", 0, "bus"))
         exp.add(SingleExpense("Bob", 0, "bus"))
-        exp.add(SingleExpense("Charlie", 0, "ice cream"))
-        exp.add(SingleExpense("David", 6, "train"))
+        exp.add(
+            SingleExpense(
+                "Charlie",
+                0,
+                "ice cream"
+            )
+        )
+        exp.add(
+            SingleExpense(
+                "David",
+                6,
+                "train"
+            )
+        )
 
         testSettlement(exp)
     }
@@ -125,7 +175,13 @@ class ConstantsTest {
             (1..2).forEach { _ ->
                 val a = abs(Random.nextInt()).toLong()
                 val name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
-                exp.add(SingleExpense(name, a, "a"))
+                exp.add(
+                    SingleExpense(
+                        name,
+                        a,
+                        "a"
+                    )
+                )
             }
             testSettlement(exp)
         }
@@ -144,7 +200,13 @@ class ConstantsTest {
                     name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 }
                 namesSet.add(name)
-                exp.add(SingleExpense(name, a, "a"))
+                exp.add(
+                    SingleExpense(
+                        name,
+                        a,
+                        "a"
+                    )
+                )
             }
             testSettlement(exp)
         }
@@ -162,7 +224,13 @@ class ConstantsTest {
                     name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 }
                 namesSet.add(name)
-                exp.add(SingleExpense(name, a, "a"))
+                exp.add(
+                    SingleExpense(
+                        name,
+                        a,
+                        "a"
+                    )
+                )
             }
             testSettlement(exp)
         }
@@ -180,7 +248,13 @@ class ConstantsTest {
                     name = "a" + abs(Random.nextInt()).toString() + "_" + a.toString()
                 }
                 namesSet.add(name)
-                exp.add(SingleExpense(name, a, "a"))
+                exp.add(
+                    SingleExpense(
+                        name,
+                        a,
+                        "a"
+                    )
+                )
             }
             testSettlement(exp)
         }
@@ -194,7 +268,9 @@ class ConstantsTest {
     @Test
     fun convertAmountToString_420() {
         val separatorChar: Char = DecimalFormatSymbols.getInstance().decimalSeparator
-        assertEquals("4" + separatorChar + "20", convertAmountToString(420))
+        assertEquals("4" + separatorChar + "20",
+            convertAmountToString(420)
+        )
     }
 
 
@@ -213,7 +289,8 @@ class ConstantsTest {
             (-1L) to Pair("-0", "01"))
         data.forEach {
             assertEquals(it.value.first + separatorChar + it.value.second,
-                convertAmountToString(it.key))
+                convertAmountToString(it.key)
+            )
         }
     }
 
@@ -240,7 +317,8 @@ class ConstantsTest {
             "0,01" to 1L)
 
         data.forEach {
-            val res = convertStringToAmount(it.key)
+            val res =
+                convertStringToAmount(it.key)
             assertTrue(res.isSuccess)
             assertEquals(it.value, res.getOrNull())
         }
