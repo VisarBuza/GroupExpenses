@@ -19,21 +19,21 @@
             android:id="@+id/edit_person"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:hint="@string/person"/>
 
         <EditText
             android:id="@+id/edit_amount"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:hint="@string/amount"/>
 
         <EditText
             android:id="@+id/edit_description"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:hint="@string/description"/>
 
         <LinearLayout

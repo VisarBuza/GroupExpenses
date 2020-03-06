@@ -7,8 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import imt3673.ass.groupexpenses.MainActivity
 
 import imt3673.ass.groupexpenses.R
+import imt3673.ass.groupexpenses.Utils.SingleExpense
+import imt3673.ass.groupexpenses.Utils.convertStringToAmount
+import imt3673.ass.groupexpenses.Utils.sanitizeName
 import imt3673.ass.groupexpenses.databinding.FragmentAddExpenseBinding
 
 /**
@@ -25,7 +29,12 @@ class AddExpenseFragment : Fragment() {
         }
 
         binding.btnAddExpense.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_settlementFragment_to_mainFragment)
+            (activity as MainActivity).expenses.add(SingleExpense(
+                sanitizeName(binding.editPerson.text.toString()),
+                convertStringToAmount(binding.editAmount.text.toString()).getOrThrow(),
+                binding.editDescription.text.toString()
+            ))
+            view.findNavController().navigate(R.id.action_addExpenseFragment_to_mainFragment)
         }
 
         return binding.root

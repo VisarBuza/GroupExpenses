@@ -31,7 +31,7 @@ class SettlementFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settlement, container, false)
 
         if ((activity as MainActivity).expenses.allExpenses().isNotEmpty()) {
-            (activity as MainActivity).settlement = calculateSettlement((activity as MainActivity).expenses)
+            (activity as MainActivity).updateSettlement()
             (activity as MainActivity).settlement.forEach { renderTable(it) }
         }
 

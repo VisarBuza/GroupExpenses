@@ -29,6 +29,7 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        binding.btnSettlement.isEnabled = false
 
         var totalExpenses: Long = 0
         var averageExpense: Long = 0
@@ -36,6 +37,7 @@ class MainFragment : Fragment() {
             totalExpenses = (activity as MainActivity).expenses.allExpenses().map { it.amount }.sum()
             averageExpense = totalExpenses / (activity as MainActivity).expenses.allExpenses().size
             (activity as MainActivity).expenses.allExpenses().forEach { renderTable(it) }
+            binding.btnSettlement.isEnabled = true
         }
 
         binding.txtExpensesTotal.text = convertAmountToString(totalExpenses)
