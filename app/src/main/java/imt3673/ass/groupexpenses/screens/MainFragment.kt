@@ -1,6 +1,7 @@
 package imt3673.ass.groupexpenses.screens
 
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import imt3673.ass.groupexpenses.R
 import imt3673.ass.groupexpenses.Utils.Expenses
 import imt3673.ass.groupexpenses.Utils.SingleExpense
 import imt3673.ass.groupexpenses.Utils.Transaction
+import imt3673.ass.groupexpenses.Utils.convertAmountToString
 import imt3673.ass.groupexpenses.databinding.FragmentMainBinding
 
 /**
@@ -23,7 +25,7 @@ import imt3673.ass.groupexpenses.databinding.FragmentMainBinding
  */
 class MainFragment : Fragment() {
 
-    lateinit var binding: FragmentMainBinding
+    private lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
@@ -36,8 +38,8 @@ class MainFragment : Fragment() {
             (activity as MainActivity).expenses.allExpenses().forEach { renderTable(it) }
         }
 
-        binding.txtExpensesTotal.text = totalExpenses.toString()
-        binding.txtExpensesAvr.text = averageExpense.toString()
+        binding.txtExpensesTotal.text = convertAmountToString(totalExpenses)
+        binding.txtExpensesAvr.text = convertAmountToString(averageExpense)
 
 
         binding.btnAddData.setOnClickListener { view: View ->
@@ -58,12 +60,15 @@ class MainFragment : Fragment() {
 
         val person = TextView(context)
         person.text = expense.person
+        person.gravity = Gravity.CENTER
 
         val amount = TextView(context)
-        amount.text = expense.amount.toString()
+        amount.text = convertAmountToString(expense.amount)
+        amount.gravity = Gravity.CENTER
 
         val description = TextView(context)
         description.text = expense.description
+        description.gravity = Gravity.CENTER
 
         row.addView(person)
         row.addView(amount)

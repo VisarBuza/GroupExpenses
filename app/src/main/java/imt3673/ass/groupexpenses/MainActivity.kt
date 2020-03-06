@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        expenses.add(SingleExpense("Visar", 30, "Food"))
-        expenses.add(SingleExpense("Ardit", 50, "Accomodation"))
+        expenses.add(SingleExpense("Visar", 3000, "Food"))
+        expenses.add(SingleExpense("Ardit", 5000, "Accomodation"))
         setupUI()
     }
 

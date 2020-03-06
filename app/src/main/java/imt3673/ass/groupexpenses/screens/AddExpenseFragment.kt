@@ -20,8 +20,12 @@ class AddExpenseFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentAddExpenseBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_expense, container, false)
 
-        binding.cancelButton.setOnClickListener { view: View ->
+        binding.btnCancel.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_addExpenseFragment_to_mainFragment)
+        }
+
+        binding.btnAddExpense.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_settlementFragment_to_mainFragment)
         }
 
         return binding.root

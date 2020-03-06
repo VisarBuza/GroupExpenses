@@ -73,24 +73,27 @@
             android:layout_width="409dp"
             android:layout_height="496dp"
             android:layout_marginTop="16dp"
-            android:stretchColumns="1,2, 3"
+            android:stretchColumns="0, 1, 2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_expenses_total">
 
             <TableRow android:padding="10dp">
                 <TextView
-                    android:layout_column="1"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
                     android:text="@string/payer"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_column="2"
+                    android:layout_column="1"
+                    android:layout_gravity="center"
                     android:text="@string/amount"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_column="3"
+                    android:layout_column="2"
+                    android:layout_gravity="center"
                     android:text="@string/description"
                     android:textStyle="bold" />
             </TableRow>

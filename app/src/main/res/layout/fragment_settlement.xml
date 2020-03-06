@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <TableLayout
-            android:id="@+id/tbl_expenses"
+            android:id="@+id/tbl_settlements"
             android:layout_width="409dp"
             android:layout_height="496dp"
             android:layout_marginTop="16dp"
@@ -21,16 +21,19 @@
 
                 <TextView
                     android:layout_column="0"
+                    android:layout_gravity="center"
                     android:text="@string/payer"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_column="1"
+                    android:layout_gravity="center"
                     android:text="@string/payee"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_column="2"
+                    android:layout_gravity="center"
                     android:text="@string/amount"
                     android:textStyle="bold" />
             </TableRow>

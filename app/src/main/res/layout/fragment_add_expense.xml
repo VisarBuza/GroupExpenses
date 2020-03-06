@@ -4,17 +4,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <LinearLayout
+        android:id="@+id/dataentry_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center">
         <TextView
+            android:id="@+id/txt_add_expenses_error"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+
+        <EditText
+            android:id="@+id/edit_person"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Add Expense"/>
-        <Button
-            android:id="@+id/cancelButton"
+            android:layout_height="30dp"
+            android:hint="@string/person"/>
+
+        <EditText
+            android:id="@+id/edit_amount"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Cancel"/>
+            android:layout_height="30dp"
+            android:hint="@string/amount"/>
+
+        <EditText
+            android:id="@+id/edit_description"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:hint="@string/description"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"/>
+            <Button
+                android:id="@+id/btn_add_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_expense"/>
+        </LinearLayout>
     </LinearLayout>
+
 </layout>

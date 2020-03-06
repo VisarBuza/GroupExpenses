@@ -11,5 +11,7 @@
     <string name="amount">Amount</string>
     <string name="description">Description</string>
     <string name="payee">Payee</string>
-    <string name="amount">Amount</string>
+    <string name="add_expense">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="person">Person</string>
 </resources>
