@@ -62,7 +62,7 @@ fun calculateSettlement(expenses: Expenses): List<Transaction> {
         val person2 = balance.last()
 
         when (person1.second + person2.second) {
-            in -expenses.allExpenses().size/2 * 10..expenses.allExpenses().size/2 * 10-> {
+            in -10..10-> {
                 balance.remove(person2)
                 balance.remove(person1)
             }
