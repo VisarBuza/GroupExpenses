@@ -132,7 +132,9 @@ class MainActivityTest {
         onView(withId(R.id.tbl_expenses)).check(matches(isDisplayed()))
 
         // we should have Alice in the table
-        onView(withId(R.id.tbl_expenses)).check(matches(withText(data.person)))
+        onView(allOf(withText(data.person), isDescendantOfA(withId(R.id.tbl_expenses))))
+            .check(matches(isDisplayed()))
+
     }
 
 
