@@ -1,8 +1,6 @@
 package imt3673.ass.groupexpenses
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import imt3673.ass.groupexpenses.Utils.Expenses
 import imt3673.ass.groupexpenses.Utils.SingleExpense

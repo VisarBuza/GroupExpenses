@@ -1,6 +1,5 @@
 package imt3673.ass.groupexpenses.screens
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import imt3673.ass.groupexpenses.MainActivity
@@ -49,7 +47,7 @@ class AddExpenseFragment : Fragment() {
             view.findNavController().navigate(R.id.action_addExpenseFragment_to_mainFragment)
         }
 
-        binding.btnAddExpense.isEnabled = false;
+        binding.btnAddExpense.isEnabled = false
 
         binding.editPerson.addTextChangedListener(btnAddTextWatcher)
         binding.editAmount.addTextChangedListener(btnAddTextWatcher)

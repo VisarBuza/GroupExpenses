@@ -9,14 +9,11 @@ import android.view.ViewGroup
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
-import androidx.core.view.marginLeft
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import imt3673.ass.groupexpenses.MainActivity
 import imt3673.ass.groupexpenses.R
-import imt3673.ass.groupexpenses.Utils.Expenses
 import imt3673.ass.groupexpenses.Utils.SingleExpense
-import imt3673.ass.groupexpenses.Utils.Transaction
 import imt3673.ass.groupexpenses.Utils.convertAmountToString
 import imt3673.ass.groupexpenses.databinding.FragmentMainBinding
 
@@ -33,10 +30,9 @@ class MainFragment : Fragment() {
 
         var totalExpenses: Long = 0
         var averageExpense: Long = 0
-        if (!(activity as MainActivity).expenses.allExpenses().isEmpty()) {
+        if ((activity as MainActivity).expenses.allExpenses().isNotEmpty()) {
             totalExpenses = (activity as MainActivity).expenses.allExpenses().map { it.amount }.sum()
             averageExpense = totalExpenses / (activity as MainActivity).expenses.allExpenses().size
-            (activity as MainActivity).expenses.allExpenses().forEach { renderTable(it) }
             binding.btnSettlement.isEnabled = true
         }
 
@@ -54,29 +50,4 @@ class MainFragment : Fragment() {
 
         return binding.root
     }
-
-    private fun renderTable(expense: SingleExpense) {
-        val row = TableRow(context)
-        row.layoutParams = TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT)
-        row.setPadding(10, 10, 10, 10)
-
-        val person = TextView(context)
-        person.text = expense.person
-        person.gravity = Gravity.CENTER
-
-        val amount = TextView(context)
-        amount.text = convertAmountToString(expense.amount)
-        amount.gravity = Gravity.CENTER
-
-        val description = TextView(context)
-        description.text = expense.description
-        description.gravity = Gravity.CENTER
-
-        row.addView(person)
-        row.addView(amount)
-        row.addView(description)
-
-        binding.tblExpenses.addView(row)
-    }
-
 }

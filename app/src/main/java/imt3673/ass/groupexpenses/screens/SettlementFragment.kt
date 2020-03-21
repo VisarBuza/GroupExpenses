@@ -10,12 +10,10 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import imt3673.ass.groupexpenses.MainActivity
 
 import imt3673.ass.groupexpenses.R
 import imt3673.ass.groupexpenses.Utils.Transaction
-import imt3673.ass.groupexpenses.Utils.calculateSettlement
 import imt3673.ass.groupexpenses.Utils.convertAmountToString
 import imt3673.ass.groupexpenses.databinding.FragmentSettlementBinding
 
