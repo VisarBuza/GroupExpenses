@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if(savedInstanceState != null) {
-            var persons = savedInstanceState.getStringArray(KEY_PERSONS)
-            var amounts = savedInstanceState.getLongArray(KEY_AMOUNTS)
-            var descriptions = savedInstanceState.getStringArray(KEY_DESCRIPTIONS)
+            val persons = savedInstanceState.getStringArray(KEY_PERSONS)
+            val amounts = savedInstanceState.getLongArray(KEY_AMOUNTS)
+            val descriptions = savedInstanceState.getStringArray(KEY_DESCRIPTIONS)
 
-            persons!!.forEachIndexed { index, s ->   index
+            persons!!.forEachIndexed { index, s ->
                 expenses.add(SingleExpense(s, amounts!![index], descriptions!![index]))
             }
         }

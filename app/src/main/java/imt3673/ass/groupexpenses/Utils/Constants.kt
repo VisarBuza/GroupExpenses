@@ -106,7 +106,7 @@ fun convertAmountToString(amount: Long): String {
     // 20 -> "0.20"
     // 500 -> "5.00"
     // 1234 -> "12.34"
-    return ("%.2f".format(amount / 100.0))
+    return "%.2f".format(amount / 100.0)
 }
 
 /**
