@@ -9,45 +9,96 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textTotal"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="88dp"
-            android:text="@string/txt_expenses_total"
-            android:textSize="25sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textAverage"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textAverage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="80dp"
-            android:text="@string/txt_expenses_avr"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txt_expenses_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="110dp"
+            android:layout_margin="15dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:textSize="20sp"
+            android:layout_marginEnd="24dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTotal" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/txt_expenses_avr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="110dp"
-            android:textSize="20sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/txt_expenses_total"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_info_outline_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/colorPrimaryDark"
+                    android:paddingBottom="10dp"
+                    android:text="@string/expense_info"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="3"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/txt_expenses_total"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txt_expenses_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="2"
+                        android:textAlignment="textEnd"
+                        android:textSize="20sp"
+                        android:textColor="@color/darkGray"
+                        tools:text="100" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textAverage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="3"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/txt_expenses_avr"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txt_expenses_avr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:textAlignment="textEnd"
+                        android:textSize="20sp"
+                        android:textColor="@color/darkGray"
+                        tools:text="75.4" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
 
         <Button
             android:id="@+id/btn_add_data"
@@ -55,6 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
             android:layout_marginBottom="30dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/btn_add_data"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -66,6 +118,7 @@
             android:layout_marginEnd="80dp"
             android:text="@string/btn_settlement"
             app:layout_constraintBaseline_toBaselineOf="@+id/btn_add_data"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TableLayout
@@ -76,9 +129,10 @@
             android:stretchColumns="0, 1, 2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_expenses_total">
+            app:layout_constraintTop_toBottomOf="@+id/cardView">
 
             <TableRow android:padding="10dp">
+
                 <TextView
                     android:layout_column="0"
                     android:layout_gravity="center"

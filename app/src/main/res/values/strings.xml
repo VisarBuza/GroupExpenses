@@ -14,4 +14,7 @@
     <string name="add_expense">Add</string>
     <string name="cancel">Cancel</string>
     <string name="person">Person</string>
+    <string name="expense_info">Expense Info</string>
+    <string name="name">Name</string>
+    <string name="add_expense2">Add Expense</string>
 </resources>
