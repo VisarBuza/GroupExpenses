@@ -32,14 +32,13 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_launcher_background" />
 
-                <TextView
+                <ImageView
                     android:id="@+id/lbl_entry_prefix"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="A"
-                    android:textColor="@android:color/white"
-                    android:textSize="32sp" />
+                    android:src="@drawable/ic_monetization_on_black_24dp"
+                    android:contentDescription="Logo" />
             </FrameLayout>
 
             <LinearLayout
@@ -50,24 +49,18 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/lbl_entry_name"
+                    android:id="@+id/lbl_settlement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="John"
+                    android:text="Visar owes Ardit"
                     android:textColor="@android:color/black"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/lbl_entry_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bribe Mariusz to give everyone A's and then go to a pizza place to hang out for hours!" />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/lbl_entry_price"
+                android:id="@+id/lbl_entry_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

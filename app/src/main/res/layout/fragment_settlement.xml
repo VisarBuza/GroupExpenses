@@ -3,40 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/settlement_view"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TableLayout
-            android:id="@+id/tbl_settlements"
-            android:layout_width="409dp"
-            android:layout_height="496dp"
-            android:layout_marginTop="16dp"
-            tools:layout_editor_absoluteX="1dp"
-            android:stretchColumns="0,1,2">
-
-            <TableRow android:padding="10dp">
-
-                <TextView
-                    android:layout_column="0"
-                    android:layout_gravity="center"
-                    android:text="@string/payer"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_column="1"
-                    android:layout_gravity="center"
-                    android:text="@string/payee"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_column="2"
-                    android:layout_gravity="center"
-                    android:text="@string/amount"
-                    android:textStyle="bold" />
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/settlementList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/entry_settlement"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

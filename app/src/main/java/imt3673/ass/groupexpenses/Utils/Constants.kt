@@ -21,11 +21,10 @@ fun sanitizeName(name: String): String {
         .filter { it.isLetter() || it == '-' || it.isWhitespace() }
         .trim()
         .split("\\s+".toRegex())
-        .map { it.toLowerCase(Locale.ROOT).capitalize() }
-        .joinToString(separator = " ", limit = 2, truncated = "")
-        .split("-")
-        .map { it.capitalize() }
-        .joinToString("-")
+        .joinToString(separator = " ", limit = 2, truncated = "") {
+            it.toLowerCase(Locale.ROOT).capitalize()
+        }
+        .split("-").joinToString("-") { it.capitalize() }
         .trimEnd()
 }
 
