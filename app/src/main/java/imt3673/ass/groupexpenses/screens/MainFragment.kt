@@ -15,6 +15,7 @@ import imt3673.ass.groupexpenses.MainActivity
 import imt3673.ass.groupexpenses.R
 import imt3673.ass.groupexpenses.Utils.SingleExpense
 import imt3673.ass.groupexpenses.Utils.convertAmountToString
+import imt3673.ass.groupexpenses.adapters.ExpenseAdapter
 import imt3673.ass.groupexpenses.databinding.FragmentMainBinding
 
 /**
@@ -30,15 +31,19 @@ class MainFragment : Fragment() {
 
         var totalExpenses: Long = 0
         var averageExpense: Long = 0
+
+        val adapter = ExpenseAdapter()
+        binding.expenseList.adapter = adapter
+
         if ((activity as MainActivity).expenses.allExpenses().isNotEmpty()) {
             totalExpenses = (activity as MainActivity).expenses.allExpenses().map { it.amount }.sum()
             averageExpense = totalExpenses / (activity as MainActivity).expenses.allExpenses().size
+            adapter.data = (activity as MainActivity).expenses.allExpenses()
             binding.btnSettlement.isEnabled = true
         }
 
         binding.txtExpensesTotal.text = convertAmountToString(totalExpenses)
         binding.txtExpensesAvr.text = convertAmountToString(averageExpense)
-
 
         binding.btnAddData.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_mainFragment_to_addExpenseFragment)

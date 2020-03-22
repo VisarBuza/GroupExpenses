@@ -1,5 +1,7 @@
 package imt3673.ass.groupexpenses.screens
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import imt3673.ass.groupexpenses.MainActivity
@@ -44,6 +47,8 @@ class AddExpenseFragment : Fragment() {
                     binding.editDescription.text.toString()
                 )
             )
+            val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.btnAddExpense.windowToken, 0)
             view.findNavController().navigate(R.id.action_addExpenseFragment_to_mainFragment)
         }
 
