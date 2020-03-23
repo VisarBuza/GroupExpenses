@@ -4,13 +4,16 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import imt3673.ass.groupexpenses.ExpenseViewModel
 import imt3673.ass.groupexpenses.MainActivity
 
 import imt3673.ass.groupexpenses.R
@@ -25,12 +28,9 @@ import imt3673.ass.groupexpenses.databinding.FragmentAddExpenseBinding
 class AddExpenseFragment : Fragment() {
 
     lateinit var binding: FragmentAddExpenseBinding
+    lateinit var expenseViewModel: ExpenseViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_expense, container, false)
 
@@ -38,8 +38,11 @@ class AddExpenseFragment : Fragment() {
             view.findNavController().navigate(R.id.action_addExpenseFragment_to_mainFragment)
         }
 
+        expenseViewModel = activity?.let { ViewModelProviders.of(it).get(ExpenseViewModel::class.java) }!!
+
+
         binding.btnAddExpense.setOnClickListener { view: View ->
-            (activity as MainActivity).expenses.add(
+            expenseViewModel.expenses.add(
                 SingleExpense(
                     sanitizeName(binding.editPerson.text.toString()),
                     convertStringToAmount(binding.editAmount.text.toString()).getOrThrow(),
